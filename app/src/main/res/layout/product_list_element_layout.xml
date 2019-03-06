@@ -76,7 +76,7 @@
 
             <Spinner
                 android:id="@+id/number_to_add_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
                 android:spinnerMode="dropdown" />

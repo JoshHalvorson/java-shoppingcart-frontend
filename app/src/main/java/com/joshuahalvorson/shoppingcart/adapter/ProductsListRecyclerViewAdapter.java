@@ -7,15 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsListRecyclerViewAdapter extends
@@ -55,6 +58,17 @@ public class ProductsListRecyclerViewAdapter extends
         viewHolder.productDesc.setText(product.getProductDescription());
         viewHolder.productCost.setText("$" + Double.toString(product.getProductCost()));
         viewHolder.productOnHand.setText(Integer.toString(product.getProductOnHand()) + " unit(s) left");
+
+        List<String> spinnerArray =  new ArrayList<>();
+        for(int j = 1; j <= product.getProductOnHand(); j++){
+            spinnerArray.add(Integer.toString(j));
+        }
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>
+                (activity, android.R.layout.simple_spinner_item, spinnerArray);
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        viewHolder.quantitySpinner.setAdapter(spinnerAdapter);
     }
 
     @Override
@@ -67,8 +81,7 @@ public class ProductsListRecyclerViewAdapter extends
 
         public final View view;
         TextView productName, productDesc, productCost, productOnHand;
-        ImageView productImage;
-        ProgressBar loadingCircle;
+        Spinner quantitySpinner;
 
         public ViewHolder(View view) {
             super(view);
@@ -77,6 +90,7 @@ public class ProductsListRecyclerViewAdapter extends
             productCost = view.findViewById(R.id.product_cost);
             productDesc = view.findViewById(R.id.product_desc);
             productOnHand = view.findViewById(R.id.product_on_hand);
+            quantitySpinner = view.findViewById(R.id.number_to_add_spinner);
         }
 
         @Override
