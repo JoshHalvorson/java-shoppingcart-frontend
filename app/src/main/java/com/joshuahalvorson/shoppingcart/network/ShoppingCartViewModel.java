@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
+import com.joshuahalvorson.shoppingcart.model.Shopper;
 
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public void removeProductFromCart(long productid, Callback<Product> callback) {
         ShoppingCartRepository.removeProductFromCart(productid, callback);
+    }
+
+    public void addShopper(Shopper shopper, Callback<Shopper> callback) {
+        ShoppingCartRepository.addShopper(shopper, callback);
     }
 
 }

@@ -16,15 +16,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
+import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlaceOrderFragment extends Fragment {
     private ShoppingCartViewModel viewModel;
@@ -41,6 +47,8 @@ public class PlaceOrderFragment extends Fragment {
     private EditText shippingText, billingText, nameText, phoneText;
 
     private FloatingActionButton confirmOrderButton;
+
+    private Spinner paymentMethodSpinner;
 
     public PlaceOrderFragment() {
     }
@@ -69,6 +77,7 @@ public class PlaceOrderFragment extends Fragment {
         billingText = view.findViewById(R.id.customer_billing);
         nameText = view.findViewById(R.id.customer_name);
         phoneText = view.findViewById(R.id.customer_phone);
+        paymentMethodSpinner = view.findViewById(R.id.customer_payment);
 
         confirmOrderButton = view.findViewById(R.id.confirm_order_button);
     }
@@ -125,7 +134,25 @@ public class PlaceOrderFragment extends Fragment {
                         (!billingText.getText().toString().equals("")) &&
                         (!phoneText.getText().toString().equals(""))) {
 
+                    final Shopper shopper = new Shopper();
+                    shopper.setShopperName(nameText.getText().toString());
+                    shopper.setShopperShippingAddress(shippingText.getText().toString());
+                    shopper.setShopperBillingAddress(billingText.getText().toString());
+                    shopper.setShopperPhoneNumber(phoneText.getText().toString());
+                    shopper.setShopperPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
+
                     //save info to db
+                    viewModel.addShopper(shopper, new Callback<Shopper>() {
+                        @Override
+                        public void onResponse(Call<Shopper> call, Response<Shopper> response) {
+                            Log.i("addedshopper", shopper.getShopperName() + " added");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Shopper> call, Throwable t) {
+
+                        }
+                    });
                     Log.i("placedorder", "order has been placed");
                     getFragmentManager().popBackStack();
                 }

@@ -3,6 +3,7 @@ package com.joshuahalvorson.shoppingcart.network;
 import com.google.gson.JsonObject;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
+import com.joshuahalvorson.shoppingcart.model.Shopper;
 
 import java.util.List;
 
@@ -30,6 +31,9 @@ public interface ShoppingCartClient {
     @POST("cart/add/{productid}")
     Call<Product> addProductToCart(@Header("quantity") int quantity,
                                    @Path("productid") long productid);
+
+    @POST("shopper")
+    Call<Shopper> addShopper(@Body Shopper shopper);
 
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);

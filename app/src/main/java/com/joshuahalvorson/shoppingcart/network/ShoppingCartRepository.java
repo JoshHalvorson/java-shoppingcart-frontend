@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
+import com.joshuahalvorson.shoppingcart.model.Shopper;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,4 +62,9 @@ public class ShoppingCartRepository {
         Call<Product> call = client.removeProductFromCart(productid);
         call.enqueue(callback);
     }
+    public static void addShopper(Shopper shopper, Callback<Shopper> callback) {
+        Call<Shopper> call = client.addShopper(shopper);
+        call.enqueue(callback);
+    }
+
 }
