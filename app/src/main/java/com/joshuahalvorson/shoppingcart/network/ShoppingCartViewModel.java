@@ -3,6 +3,7 @@ package com.joshuahalvorson.shoppingcart.network;
 import android.arch.lifecycle.ViewModel;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
+import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 
@@ -34,6 +35,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public void addShopper(Shopper shopper, Callback<Shopper> callback) {
         ShoppingCartRepository.addShopper(shopper, callback);
+    }
+
+    public void addOrder(Order order, Callback<Order> callback) {
+        ShoppingCartRepository.addOrder(order, callback);
     }
 
 }

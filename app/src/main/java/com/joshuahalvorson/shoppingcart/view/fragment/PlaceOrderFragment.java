@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
+import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
@@ -140,12 +141,29 @@ public class PlaceOrderFragment extends Fragment {
                     shopper.setShopperBillingAddress(billingText.getText().toString());
                     shopper.setShopperPhoneNumber(phoneText.getText().toString());
                     shopper.setShopperPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
+                    
+                    final Order order = new Order();
+                    order.setProducts(products);
+                    order.setOrderShippingAddress(shopper.getShopperShippingAddress());
+                    order.setOrderPaymentMethod(shopper.getShopperPaymentMethod());
+                    order.setOrderShipped(false);
 
                     //save info to db
                     viewModel.addShopper(shopper, new Callback<Shopper>() {
                         @Override
                         public void onResponse(Call<Shopper> call, Response<Shopper> response) {
                             Log.i("addedshopper", shopper.getShopperName() + " added");
+                            viewModel.addOrder(order, new Callback<Order>() {
+                                @Override
+                                public void onResponse(Call<Order> call, Response<Order> response) {
+                                    Log.i("addedorder", "added");
+                                }
+
+                                @Override
+                                public void onFailure(Call<Order> call, Throwable t) {
+
+                                }
+                            });
                         }
 
                         @Override

@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
+import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 
@@ -64,6 +65,11 @@ public class ShoppingCartRepository {
     }
     public static void addShopper(Shopper shopper, Callback<Shopper> callback) {
         Call<Shopper> call = client.addShopper(shopper);
+        call.enqueue(callback);
+    }
+
+    public static void addOrder(Order order, Callback<Order> callback) {
+        Call<Order> call = client.addOrder(order);
         call.enqueue(callback);
     }
 

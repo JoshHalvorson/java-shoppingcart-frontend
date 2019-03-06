@@ -2,6 +2,7 @@ package com.joshuahalvorson.shoppingcart.network;
 
 import com.google.gson.JsonObject;
 import com.joshuahalvorson.shoppingcart.model.Cart;
+import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 
@@ -34,6 +35,9 @@ public interface ShoppingCartClient {
 
     @POST("shopper")
     Call<Shopper> addShopper(@Body Shopper shopper);
+
+    @POST("order")
+    Call<Order> addOrder(@Body Order order);
 
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);

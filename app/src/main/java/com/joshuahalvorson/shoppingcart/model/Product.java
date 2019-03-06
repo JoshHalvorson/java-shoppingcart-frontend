@@ -24,12 +24,25 @@ public class Product {
     @SerializedName("suppliers")
     @Expose
     private List<Object> suppliers = null;
+    @SerializedName("orderId")
+    @Expose
+    private long orderId;
 
-    public Product(String productName, String productDescription, double productCost, Integer productOnHand) {
+    public Product(String productName, String productDescription, double productCost, Integer productOnHand,
+    long orderid) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productCost = productCost;
         this.productOnHand = productOnHand;
+        this.orderId = orderid;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getProductId() {
