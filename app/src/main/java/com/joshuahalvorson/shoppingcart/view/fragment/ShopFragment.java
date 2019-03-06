@@ -7,21 +7,31 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.joshuahalvorson.shoppingcart.R;
+import com.joshuahalvorson.shoppingcart.adapter.ProductsListRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShopFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private ShoppingCartViewModel viewModel;
+
+    private List<Product> products;
+
+    private ProductsListRecyclerViewAdapter adapter;
 
     public ShopFragment() {
     }
@@ -45,7 +55,29 @@ public class ShopFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        products = new ArrayList<>();
+        RecyclerView recyclerView = view.findViewById(R.id.products_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return true;
+            }
+        };
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(
+                        recyclerView.getContext(), layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        adapter = new ProductsListRecyclerViewAdapter(
+                        products,
+                        mListener,
+                        getActivity(),
+                        (AppCompatActivity)getActivity());
+
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -53,21 +85,30 @@ public class ShopFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
-        
+
         getAllProducts();
 
     }
 
-    private void getAllProducts() {
+    private List<Product> getAllProducts() {
+        final List<Product> tempList = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Product> products = viewModel.getAllProducts();
+                products.addAll(viewModel.getAllProducts());
                 for(Product p : products){
                     Log.i("product", p.getProductName());
                 }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         }).start();
+        return null;
     }
 
     @Override
