@@ -91,8 +91,9 @@ public class ProductsListRecyclerViewAdapter extends
                         Product responseProduct = response.body();
                         if (response.isSuccessful() && responseProduct != null) {
                             Toast.makeText(activity,
-                                    responseProduct
-                                            .getProductName() + " added", Toast.LENGTH_LONG).show();
+                                    responseProduct.getProductName() + " added to cart",
+                                    Toast.LENGTH_LONG)
+                                    .show();
                         } else {
                             Toast.makeText(activity,
                                     String.format("Response is %s", String.valueOf(response.code()))
