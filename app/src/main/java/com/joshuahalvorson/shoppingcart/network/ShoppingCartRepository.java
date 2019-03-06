@@ -50,4 +50,9 @@ public class ShoppingCartRepository {
         Call<Product> call = client.addProduct(product);
         call.enqueue(callback);
     }
+
+    public static void addProductToCart(int quantity, long productid, Callback<Product> callback) {
+        Call<Product> call = client.addProductToCart(quantity, productid);
+        call.enqueue(callback);
+    }
 }

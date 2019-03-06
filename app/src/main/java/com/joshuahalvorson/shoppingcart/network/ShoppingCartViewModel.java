@@ -21,4 +21,8 @@ public class ShoppingCartViewModel extends ViewModel {
     public void addProduct(Product product, Callback<Product> callback) {
         ShoppingCartRepository.addProduct(product, callback);
     }
+    public void addProductToCart(int quantity, long productid, Callback<Product> callback) {
+        ShoppingCartRepository.addProductToCart(quantity, productid, callback);
+    }
+
 }

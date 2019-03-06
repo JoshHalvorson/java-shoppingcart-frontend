@@ -8,7 +8,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ShoppingCartClient {
     String BASE_URL = "http://10.0.2.2:8080/";
@@ -21,4 +24,8 @@ public interface ShoppingCartClient {
 
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);
+
+    @POST("cart/add/{productid}")
+    Call<Product> addProductToCart(@Header("quantity") int quantity,
+                                   @Path("productid") long productid);
 }
