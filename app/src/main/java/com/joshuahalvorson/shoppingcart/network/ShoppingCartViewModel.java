@@ -2,6 +2,7 @@ package com.joshuahalvorson.shoppingcart.network;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ShoppingCartViewModel extends ViewModel {
         return ShoppingCartRepository.getAllProducts();
     }
 
-    public List<Product> getCartProducts(){
+    public List<Cart> getCartProducts(){
         return ShoppingCartRepository.getCartProducts();
     }
 

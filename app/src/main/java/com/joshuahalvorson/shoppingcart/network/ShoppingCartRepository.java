@@ -3,6 +3,7 @@ package com.joshuahalvorson.shoppingcart.network;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
+import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 
 import java.io.IOException;
@@ -35,10 +36,10 @@ public class ShoppingCartRepository {
         return null;
     }
 
-    public static List<Product> getCartProducts(){
-        Call<List<Product>> call = client.getCartProducts();
+    public static List<Cart> getCartProducts(){
+        Call<List<Cart>> call = client.getCartProducts();
         try {
-            Response<List<Product>> response = call.execute();
+            Response<List<Cart>> response = call.execute();
             return response.body();
         } catch (IOException e) {
             e.printStackTrace();

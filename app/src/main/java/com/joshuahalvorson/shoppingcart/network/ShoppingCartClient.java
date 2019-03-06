@@ -1,6 +1,7 @@
 package com.joshuahalvorson.shoppingcart.network;
 
 import com.google.gson.JsonObject;
+import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ShoppingCartClient {
     Call<List<Product>> getAllProducts();
 
     @GET("cart")
-    Call<List<Product>> getCartProducts();
+    Call<List<Cart>> getCartProducts();
 
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);
