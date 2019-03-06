@@ -127,6 +127,7 @@ public class PlaceOrderFragment extends Fragment {
 
                     //save info to db
                     Log.i("placedorder", "order has been placed");
+                    getFragmentManager().popBackStack();
                 }
             }
         });
