@@ -34,4 +34,15 @@ public class ShoppingCartRepository {
         }
         return null;
     }
+
+    public static List<Product> getCartProducts(){
+        Call<List<Product>> call = client.getCartProducts();
+        try {
+            Response<List<Product>> response = call.execute();
+            return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

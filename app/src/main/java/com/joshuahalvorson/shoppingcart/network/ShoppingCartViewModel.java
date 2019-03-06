@@ -10,4 +10,8 @@ public class ShoppingCartViewModel extends ViewModel {
     public List<Product> getAllProducts(){
         return ShoppingCartRepository.getAllProducts();
     }
+
+    public List<Product> getCartProducts(){
+        return ShoppingCartRepository.getCartProducts();
+    }
 }
