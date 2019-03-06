@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +34,8 @@ public class ShopFragment extends Fragment {
     private List<Product> products;
 
     private ProductsListRecyclerViewAdapter adapter;
+
+    private FloatingActionButton fab;
 
     public ShopFragment() {
     }
@@ -78,6 +82,8 @@ public class ShopFragment extends Fragment {
                         (AppCompatActivity)getActivity());
 
         recyclerView.setAdapter(adapter);
+
+        fab = view.findViewById(R.id.floatingActionButton);
     }
 
     @Override
@@ -87,6 +93,16 @@ public class ShopFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
 
         getAllProducts();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.fragment_container, new CartFragment(), "cartfragment");
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
 
     }
 
