@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.adapter.CartListRecyclerViewAdapter;
@@ -33,6 +36,7 @@ public class CartFragment extends Fragment {
     private List<Cart> carts;
 
     private RecyclerView recyclerView;
+    private FloatingActionButton placeOrderButton;
 
     private CartListRecyclerViewAdapter adapter;
 
@@ -54,6 +58,8 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         products = new ArrayList<>();
         carts = new ArrayList<>();
+
+        placeOrderButton = view.findViewById(R.id.place_order_button);
 
         recyclerView = view.findViewById(R.id.cart_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {
@@ -105,6 +111,16 @@ public class CartFragment extends Fragment {
                 });
             }
         }).start();
+
+        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.fragment_container, new PlaceOrderFragment(), "placeorderfragment");
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
     @Override
