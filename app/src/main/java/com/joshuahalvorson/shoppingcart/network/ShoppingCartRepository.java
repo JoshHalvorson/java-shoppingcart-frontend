@@ -45,4 +45,9 @@ public class ShoppingCartRepository {
         }
         return null;
     }
+
+    public static void addProduct(Product product, Callback<Product> callback) {
+        Call<Product> call = client.addProduct(product);
+        call.enqueue(callback);
+    }
 }
