@@ -96,7 +96,7 @@ public class ProductsListRecyclerViewAdapter extends
                                     .show();
                         } else {
                             Toast.makeText(activity,
-                                    String.format("Response is %s", String.valueOf(response.code()))
+                                    String.format("Response is " + String.valueOf(response.code()))
                                     , Toast.LENGTH_LONG).show();
                         }
                     }

@@ -97,7 +97,7 @@ public class CartListRecyclerViewAdapter  extends
                             viewHolder.view.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(activity,
-                                    String.format("Response is %s", String.valueOf(response.code()))
+                                    String.format("Response is " + String.valueOf(response.code()))
                                     , Toast.LENGTH_LONG).show();
                         }
                     }
