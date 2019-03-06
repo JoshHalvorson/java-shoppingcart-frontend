@@ -77,7 +77,6 @@ public class ShopFragment extends Fragment {
 
         adapter = new ProductsListRecyclerViewAdapter(
                         products,
-                        mListener,
                         getActivity(),
                         (AppCompatActivity)getActivity());
 

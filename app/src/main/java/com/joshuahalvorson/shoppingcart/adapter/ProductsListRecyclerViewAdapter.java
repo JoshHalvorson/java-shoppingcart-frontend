@@ -37,17 +37,13 @@ public class ProductsListRecyclerViewAdapter extends
 
     private ShoppingCartViewModel viewModel;
 
-    private ShopFragment.OnFragmentInteractionListener listener;
-
     FragmentActivity activity;
     AppCompatActivity appCompatActivity;
 
     public ProductsListRecyclerViewAdapter(List<Product> productList,
-                                      ShopFragment.OnFragmentInteractionListener listener,
                                       FragmentActivity activity,
                                       AppCompatActivity appCompatActivity) {
         this.productList = productList;
-        this.listener = listener;
         this.activity = activity;
         this.appCompatActivity = appCompatActivity;
     }
@@ -89,7 +85,7 @@ public class ProductsListRecyclerViewAdapter extends
                 viewModel.addProductToCart(
                         Integer.parseInt(viewHolder.quantitySpinner.getSelectedItem().toString()),
                         product.getProductId(), new Callback<Product>() {
-                            
+
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
                         Product responseProduct = response.body();
