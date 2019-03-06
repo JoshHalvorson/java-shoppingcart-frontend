@@ -12,12 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CartListRecyclerViewAdapter  extends
@@ -72,7 +78,39 @@ public class CartListRecyclerViewAdapter  extends
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         viewHolder.quantitySpinner.setAdapter(spinnerAdapter);
 
-        viewHolder.addButton.setVisibility(View.GONE);
+        viewHolder.removeButton.setBackground(activity.getResources()
+                .getDrawable(R.drawable.ic_remove_shopping_cart_black_24dp));
+
+        viewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.removeProductFromCart(product.getProductId(), new Callback<Product>() {
+                    @Override
+                    public void onResponse(Call<Product> call, Response<Product> response) {
+                        Product responseProduct = response.body();
+                        if (response.isSuccessful() && responseProduct != null) {
+                            Toast.makeText(activity,
+                                    responseProduct
+                                            .getProductName() + " removed from cart",
+                                    Toast.LENGTH_LONG).show();
+                            productList.remove(product);
+                            viewHolder.view.setVisibility(View.GONE);
+                        } else {
+                            Toast.makeText(activity,
+                                    String.format("Response is %s", String.valueOf(response.code()))
+                                    , Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Product> call, Throwable t) {
+                        Toast.makeText(activity,
+                                "Error is " + t.getMessage()
+                                , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -86,7 +124,7 @@ public class CartListRecyclerViewAdapter  extends
         private final View view;
         private TextView productName, productDesc, productCost, productOnHand;
         private Spinner quantitySpinner;
-        private Button addButton;
+        private Button removeButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -96,7 +134,7 @@ public class CartListRecyclerViewAdapter  extends
             productDesc = view.findViewById(R.id.product_desc);
             productOnHand = view.findViewById(R.id.product_on_hand);
             quantitySpinner = view.findViewById(R.id.number_to_add_spinner);
-            addButton = view.findViewById(R.id.add_button);
+            removeButton = view.findViewById(R.id.action_button);
         }
 
         @Override

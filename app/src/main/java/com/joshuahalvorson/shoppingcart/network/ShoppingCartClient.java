@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -29,4 +30,7 @@ public interface ShoppingCartClient {
     @POST("cart/add/{productid}")
     Call<Product> addProductToCart(@Header("quantity") int quantity,
                                    @Path("productid") long productid);
+
+    @DELETE("cart/remove/{productid}")
+    Call<Product> removeProductFromCart(@Path("productid") long productid);
 }

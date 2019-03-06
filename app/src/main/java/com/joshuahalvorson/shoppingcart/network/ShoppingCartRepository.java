@@ -56,4 +56,9 @@ public class ShoppingCartRepository {
         Call<Product> call = client.addProductToCart(quantity, productid);
         call.enqueue(callback);
     }
+
+    public static void removeProductFromCart(long productid, Callback<Product> callback) {
+        Call<Product> call = client.removeProductFromCart(productid);
+        call.enqueue(callback);
+    }
 }
