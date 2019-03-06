@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.ShopkeeperFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -76,11 +77,14 @@ public class MainActivity extends AppCompatActivity implements
 
         if (id == R.id.nav_shop) {
             ft = fragmentManager.beginTransaction();
-            ft.add(R.id.fragment_container, new ShopFragment(), "shopfragment");
+            ft.replace(R.id.fragment_container, new ShopFragment(), "shopfragment");
             ft.addToBackStack(null);
             ft.commit();
         } else if (id == R.id.nav_shopkeep) {
-
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container, new ShopkeeperFragment(), "shopkeeperfragment");
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.nav_admin) {
 
         }
