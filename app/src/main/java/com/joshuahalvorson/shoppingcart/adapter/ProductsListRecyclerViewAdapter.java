@@ -132,7 +132,7 @@ public class ProductsListRecyclerViewAdapter extends
             productDesc = view.findViewById(R.id.product_desc);
             productOnHand = view.findViewById(R.id.product_on_hand);
             quantitySpinner = view.findViewById(R.id.number_to_add_spinner);
-            addButton = view.findViewById(R.id.add_button);
+            addButton = view.findViewById(R.id.action_button);
         }
 
         @Override
