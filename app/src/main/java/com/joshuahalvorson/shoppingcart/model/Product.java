@@ -28,6 +28,9 @@ public class Product implements Serializable {
     @SerializedName("orderId")
     @Expose
     private long orderId;
+    @SerializedName("productActive")
+    @Expose
+    private boolean productActive;
 
     public Product(String productName, String productDescription, double productCost, Integer productOnHand,
     long orderid) {
@@ -36,6 +39,14 @@ public class Product implements Serializable {
         this.productCost = productCost;
         this.productOnHand = productOnHand;
         this.orderId = orderid;
+    }
+
+    public boolean isProductActive() {
+        return productActive;
+    }
+
+    public void setProductActive(boolean productActive) {
+        this.productActive = productActive;
     }
 
     public long getOrderId() {

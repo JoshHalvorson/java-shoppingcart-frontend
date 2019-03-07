@@ -45,4 +45,7 @@ public interface ShoppingCartClient {
 
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);
+
+    @DELETE("shopkeeper/product/{productid}")
+    Call<Product> removeProduct(@Path("productid") long productid);
 }

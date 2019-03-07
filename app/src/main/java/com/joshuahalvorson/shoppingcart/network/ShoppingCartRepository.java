@@ -9,6 +9,7 @@ import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,6 +33,23 @@ public class ShoppingCartRepository {
         try {
             Response<List<Product>> response = call.execute();
             return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Product> getAllActiveProducts(){
+        Call<List<Product>> call = client.getAllProducts();
+        try {
+            List<Product> sortedList = new ArrayList<>();
+            Response<List<Product>> response = call.execute();
+            for(int i = response.body().size() - 1; i >= 0; i--){
+                if(response.body().get(i).isProductActive()){
+                    sortedList.add(response.body().get(i));
+                }
+            }
+            return sortedList;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,6 +81,7 @@ public class ShoppingCartRepository {
         Call<Product> call = client.removeProductFromCart(productid);
         call.enqueue(callback);
     }
+
     public static void addShopper(Shopper shopper, Callback<Shopper> callback) {
         Call<Shopper> call = client.addShopper(shopper);
         call.enqueue(callback);
@@ -75,6 +94,11 @@ public class ShoppingCartRepository {
 
     public static void updateProduct(Product product, long productid, Callback<Product> callback){
         Call<Product> call = client.updateProduct(product, productid);
+        call.enqueue(callback);
+    }
+
+    public static void removeProduct(long productid, Callback<Product> callback) {
+        Call<Product> call = client.removeProduct(productid);
         call.enqueue(callback);
     }
 

@@ -17,6 +17,10 @@ public class ShoppingCartViewModel extends ViewModel {
         return ShoppingCartRepository.getAllProducts();
     }
 
+    public List<Product> getAllActiveProducts(){
+        return ShoppingCartRepository.getAllActiveProducts();
+    }
+
     public List<Cart> getCartProducts(){
         return ShoppingCartRepository.getCartProducts();
     }
@@ -43,6 +47,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public void updateProduct(Product product, long productid, Callback<Product> callback){
         ShoppingCartRepository.updateProduct(product, productid, callback);
+    }
+
+    public void removeProduct(long productid, Callback<Product> callback) {
+        ShoppingCartRepository.removeProduct(productid, callback);
     }
 
 }

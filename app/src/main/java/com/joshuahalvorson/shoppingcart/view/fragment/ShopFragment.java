@@ -106,14 +106,10 @@ public class ShopFragment extends Fragment {
     }
 
     private List<Product> getAllProducts() {
-        final List<Product> tempList = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                products.addAll(viewModel.getAllProducts());
-                for(Product p : products){
-                    Log.i("product", p.getProductName());
-                }
+                products.addAll(viewModel.getAllActiveProducts());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
