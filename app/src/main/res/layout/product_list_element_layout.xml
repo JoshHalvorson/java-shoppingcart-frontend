@@ -10,86 +10,79 @@
     android:layout_marginBottom="15dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/left_linear_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="15dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/product_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4sp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/product_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="11dp"
-            tools:layout_editor_absoluteY="13dp">
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/product_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="4sp"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/product_cost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/product_on_hand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@android:color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/product_on_hand"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
 
-            <Spinner
-                android:id="@+id/number_to_add_spinner"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:spinnerMode="dropdown" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/action_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical|end"
-                android:layout_weight="0"
-                android:background="@drawable/ic_add_shopping_cart_black_24dp" />
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical|end"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/left_linear_layout"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <Spinner
+            android:id="@+id/number_to_add_spinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/action_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_weight="0"
+            android:background="@drawable/ic_add_shopping_cart_black_24dp"
+            android:gravity="end" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
