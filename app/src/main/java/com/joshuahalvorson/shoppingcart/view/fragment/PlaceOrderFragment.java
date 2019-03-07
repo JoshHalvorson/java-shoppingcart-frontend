@@ -87,20 +87,23 @@ public class PlaceOrderFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
-        new Thread(new Runnable() {
+
+        final List<Cart> productsInCart = new ArrayList<>();
+        final List<Product> productsList = new ArrayList<>();
+
+        viewModel.getCartProducts(new Callback<List<Cart>>() {
             @Override
-            public void run() {
-                List<Cart> productsInCart = viewModel.getCartProducts();
-                List<Product> productsList = viewModel.getAllProducts();
-                for (final Cart c : productsInCart) {
-                    for (final Product p : productsList) {
-                        if (c.getProductId() == p.getProductId()) {
-                            products.add(p);
-                            carts.add(c);
-                            cost += (c.getQuantity() * p.getProductCost());
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+
+                viewModel.getAllProducts(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        for (final Cart c : productsInCart) {
+                            for (final Product p : productsList) {
+                                if (c.getProductId() == p.getProductId()) {
+                                    products.add(p);
+                                    carts.add(c);
+                                    cost += (c.getQuantity() * p.getProductCost());
                                     TextView textView = new TextView(getContext());
                                     textView.setText(p.getProductName() + " (" + c.getQuantity() + ") " +
                                             "$" + p.getProductCost() + "/each");
@@ -109,12 +112,22 @@ public class PlaceOrderFragment extends Fragment {
                                     orderList.addView(textView);
                                     costText.setText("Total cost: $" + Double.toString(cost));
                                 }
-                            });
+                            }
                         }
                     }
-                }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                    }
+                });
             }
-        }).start();
+
+            @Override
+            public void onFailure(Call<List<Cart>> call, Throwable t) {
+
+            }
+        });
 
         sameAsBilling.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

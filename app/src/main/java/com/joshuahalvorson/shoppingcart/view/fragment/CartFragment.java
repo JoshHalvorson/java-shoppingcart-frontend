@@ -29,6 +29,10 @@ import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CartFragment extends Fragment {
     private ShoppingCartViewModel viewModel;
 
@@ -88,29 +92,47 @@ public class CartFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final List<Product> productsList = new ArrayList<>();
+        final List<Cart> productsInCart = new ArrayList<>();
+
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
-        new Thread(new Runnable() {
+
+        viewModel.getCartProducts(new Callback<List<Cart>>() {
             @Override
-            public void run() {
-                List<Cart> productsInCart = viewModel.getCartProducts();
-                List<Product> productsList = viewModel.getAllProducts();
-                for(Cart c : productsInCart){
-                    for(Product p : productsList){
-                        if(c.getProductId() == p.getProductId()){
-                            products.add(p);
-                            carts.add(c);
-                            Log.i("productsincart", p.getProductName() + " " + c.getQuantity().toString());
+            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+
+                productsInCart.addAll(response.body());
+
+                viewModel.getAllProducts(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                        productsList.addAll(response.body());
+
+                        for(Cart c : productsInCart){
+                            for(Product p : productsList){
+                                if(c.getProductId() == p.getProductId()){
+                                    products.add(p);
+                                    carts.add(c);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
                         }
                     }
-                }
-                getActivity().runOnUiThread(new Runnable() {
+
                     @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+
                     }
                 });
             }
-        }).start();
+
+            @Override
+            public void onFailure(Call<List<Cart>> call, Throwable t) {
+
+            }
+
+        });
 
         placeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override

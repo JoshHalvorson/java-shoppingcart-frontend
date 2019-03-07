@@ -28,43 +28,14 @@ public class ShoppingCartRepository {
     private static ShoppingCartClient client = retrofit.create(ShoppingCartClient.class);
 
 
-    public static List<Product> getAllProducts(){
+    public static void getAllProducts(Callback<List<Product>> callback) {
         Call<List<Product>> call = client.getAllProducts();
-        try {
-            Response<List<Product>> response = call.execute();
-            return response.body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        call.enqueue(callback);
     }
 
-    public static List<Product> getAllActiveProducts(){
-        Call<List<Product>> call = client.getAllProducts();
-        try {
-            List<Product> sortedList = new ArrayList<>();
-            Response<List<Product>> response = call.execute();
-            for(int i = response.body().size() - 1; i >= 0; i--){
-                if(response.body().get(i).isProductActive()){
-                    sortedList.add(response.body().get(i));
-                }
-            }
-            return sortedList;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static List<Cart> getCartProducts(){
+    public static void getCartProducts(Callback<List<Cart>> callback){
         Call<List<Cart>> call = client.getCartProducts();
-        try {
-            Response<List<Cart>> response = call.execute();
-            return response.body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        call.enqueue(callback);
     }
 
     public static void addProduct(Product product, Callback<Product> callback) {

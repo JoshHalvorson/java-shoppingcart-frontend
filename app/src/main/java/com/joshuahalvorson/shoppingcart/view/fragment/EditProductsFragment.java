@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.adapter.EditProductsRecyclerViewAdapter;
@@ -21,6 +22,10 @@ import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditProductsFragment extends Fragment {
     private ShoppingCartViewModel viewModel;
@@ -77,19 +82,18 @@ public class EditProductsFragment extends Fragment {
         getAllProducts();
     }
 
-    private List<Product> getAllProducts() {
-        new Thread(new Runnable() {
+    private void getAllProducts() {
+        viewModel.getAllProducts(new Callback<List<Product>>() {
             @Override
-            public void run() {
-                products.addAll(viewModel.getAllProducts());
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                products.addAll(response.body());
+                adapter.notifyDataSetChanged();
             }
-        }).start();
-        return null;
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -13,16 +13,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ShoppingCartViewModel extends ViewModel {
-    public List<Product> getAllProducts(){
-        return ShoppingCartRepository.getAllProducts();
+
+    public void getAllProducts(Callback<List<Product>> callback){
+        ShoppingCartRepository.getAllProducts(callback);
     }
 
-    public List<Product> getAllActiveProducts(){
-        return ShoppingCartRepository.getAllActiveProducts();
-    }
-
-    public List<Cart> getCartProducts(){
-        return ShoppingCartRepository.getCartProducts();
+    public void getCartProducts(Callback<List<Cart>> callback){
+        ShoppingCartRepository.getCartProducts(callback);
     }
 
     public void addProduct(Product product, Callback<Product> callback) {
