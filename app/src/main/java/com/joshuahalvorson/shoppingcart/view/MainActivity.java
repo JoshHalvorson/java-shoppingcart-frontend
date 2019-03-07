@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.view.fragment.EditProductsFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.EditSuppliersFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.ManageUsersFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.OrdersFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
 
@@ -97,9 +98,11 @@ public class MainActivity extends AppCompatActivity implements
             ft.replace(R.id.fragment_container, new EditSuppliersFragment(), "editsuppliersfragment");
             ft.addToBackStack(null);
             ft.commit();
-        }
-        else if (id == R.id.nav_admin_users) {
-
+        } else if (id == R.id.nav_admin_users) {
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container, new ManageUsersFragment(), "manageusersfragment");
+            ft.addToBackStack(null);
+            ft.commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
