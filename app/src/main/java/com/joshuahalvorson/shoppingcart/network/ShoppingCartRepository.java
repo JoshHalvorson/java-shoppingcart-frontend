@@ -102,4 +102,9 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
+    public static void getAllOrders(Callback<List<Order>> callback) {
+        Call<List<Order>> call = client.getAllOrders();
+        call.enqueue(callback);
+    }
+
 }

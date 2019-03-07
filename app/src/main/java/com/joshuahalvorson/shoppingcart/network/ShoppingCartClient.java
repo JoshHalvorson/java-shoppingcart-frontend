@@ -27,6 +27,9 @@ public interface ShoppingCartClient {
     @GET("cart")
     Call<List<Cart>> getCartProducts();
 
+    @GET("shopkeeper/orders")
+    Call<List<Order>> getAllOrders();
+
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);
 

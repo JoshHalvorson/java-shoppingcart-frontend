@@ -53,4 +53,8 @@ public class ShoppingCartViewModel extends ViewModel {
         ShoppingCartRepository.removeProduct(productid, callback);
     }
 
+    public void getAllOrders(Callback<List<Order>> callback){
+        ShoppingCartRepository.getAllOrders(callback);
+    }
+
 }
