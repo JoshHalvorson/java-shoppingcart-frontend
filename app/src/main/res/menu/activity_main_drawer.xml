@@ -3,19 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/shopper"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:visible="true">
         <item
             android:id="@+id/nav_shop"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="Shop" />
+    </group>
+
+    <group
+        android:id="@+id/shopkeeper"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:visible="true">
         <item
-            android:id="@+id/nav_shopkeep"
+            android:id="@+id/nav_shopkeep_products"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="Shopkeeper" />
+            android:title="Products" />
         <item
-            android:id="@+id/nav_admin"
+            android:id="@+id/nav_shopkeep_orders"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Orders" />
+        <item
+            android:id="@+id/nav_shopkeep_suppliers"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Suppliers" />
+    </group>
+
+    <group
+        android:id="@+id/admin"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:visible="true">
+
+        <item
+            android:id="@+id/nav_admin_users"
             android:icon="@drawable/ic_verified_user_black_24dp"
-            android:title="Admin" />
+            android:title="Users" />
+
     </group>
 
 </menu>

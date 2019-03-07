@@ -13,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.joshuahalvorson.shoppingcart.R;
+import com.joshuahalvorson.shoppingcart.view.fragment.EditProductsFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.EditSuppliersFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.OrdersFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
-import com.joshuahalvorson.shoppingcart.view.fragment.ShopkeeperFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -80,12 +82,23 @@ public class MainActivity extends AppCompatActivity implements
             ft.replace(R.id.fragment_container, new ShopFragment(), "shopfragment");
             ft.addToBackStack(null);
             ft.commit();
-        } else if (id == R.id.nav_shopkeep) {
+        } else if (id == R.id.nav_shopkeep_products) {
             ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.fragment_container, new ShopkeeperFragment(), "shopkeeperfragment");
+            ft.replace(R.id.fragment_container, new EditProductsFragment(), "editproductsfragment");
             ft.addToBackStack(null);
             ft.commit();
-        } else if (id == R.id.nav_admin) {
+        } else if (id == R.id.nav_shopkeep_orders) {
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container, new OrdersFragment(), "ordersfragment");
+            ft.addToBackStack(null);
+            ft.commit();
+        } else if (id == R.id.nav_shopkeep_suppliers) {
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container, new EditSuppliersFragment(), "editsuppliersfragment");
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+        else if (id == R.id.nav_admin_users) {
 
         }
 

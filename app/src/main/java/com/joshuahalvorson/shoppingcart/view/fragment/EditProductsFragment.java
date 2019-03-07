@@ -2,6 +2,7 @@ package com.joshuahalvorson.shoppingcart.view.fragment;
 
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -44,6 +45,8 @@ public class EditProductsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
     @Override
@@ -85,13 +88,13 @@ public class EditProductsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
 
-        getAllProducts();
+        //getAllProducts();
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.add(R.id.fragment_container, new AddProductFragment(), "addproductfragment");
+                ft.replace(R.id.fragment_container, new AddProductFragment(), "addproductfragment");
                 ft.addToBackStack(null);
                 ft.commit();
             }
@@ -111,5 +114,11 @@ public class EditProductsFragment extends Fragment {
                 Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAllProducts();
     }
 }
