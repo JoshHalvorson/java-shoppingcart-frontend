@@ -43,13 +43,6 @@ public class EditProductsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_edit_products, container, false);
@@ -88,7 +81,18 @@ public class EditProductsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
 
-        //getAllProducts();
+        viewModel.getAllProducts(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                products.addAll(response.body());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,26 +103,5 @@ public class EditProductsFragment extends Fragment {
                 ft.commit();
             }
         });
-    }
-
-    private void getAllProducts() {
-        viewModel.getAllProducts(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                products.addAll(response.body());
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getAllProducts();
     }
 }
