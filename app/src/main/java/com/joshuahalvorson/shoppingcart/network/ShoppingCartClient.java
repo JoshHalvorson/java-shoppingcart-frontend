@@ -56,6 +56,9 @@ public interface ShoppingCartClient {
     @PUT("shopkeeper/supplier/{supplierid}")
     Call<Supplier> updateSupplier(@Body Supplier supplier, @Path("supplierid") long supplierid);
 
+    @PUT("admin/shopper/{shopperid}")
+    Call<Shopper> updateShopper(@Body Shopper shopper, @Path("shopperid") long shopperid);
+
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);
 
