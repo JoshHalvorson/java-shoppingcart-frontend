@@ -5,6 +5,7 @@ import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
+import com.joshuahalvorson.shoppingcart.model.Supplier;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public interface ShoppingCartClient {
 
     @GET("shopkeeper/orders")
     Call<List<Order>> getAllOrders();
+
+    @GET("shopkeeper/suppliers")
+    Call<List<Supplier>> getAllSuppliers();
 
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);

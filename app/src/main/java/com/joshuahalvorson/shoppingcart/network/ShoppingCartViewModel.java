@@ -6,6 +6,7 @@ import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
+import com.joshuahalvorson.shoppingcart.model.Supplier;
 
 import java.util.List;
 
@@ -52,6 +53,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public void getAllOrders(Callback<List<Order>> callback){
         ShoppingCartRepository.getAllOrders(callback);
+    }
+
+    public void getAllSuppliers(Callback<List<Supplier>> callback){
+        ShoppingCartRepository.getAllSuppliers(callback);
     }
 
 }

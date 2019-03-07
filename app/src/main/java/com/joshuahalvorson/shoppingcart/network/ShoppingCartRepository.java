@@ -7,6 +7,7 @@ import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
+import com.joshuahalvorson.shoppingcart.model.Supplier;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,6 +76,11 @@ public class ShoppingCartRepository {
 
     public static void getAllOrders(Callback<List<Order>> callback) {
         Call<List<Order>> call = client.getAllOrders();
+        call.enqueue(callback);
+    }
+
+    public static void getAllSuppliers(Callback<List<Supplier>> callback){
+        Call<List<Supplier>> call = client.getAllSuppliers();
         call.enqueue(callback);
     }
 
