@@ -89,4 +89,9 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
+    public static void getAllShoppers(Callback<List<Shopper>> callback){
+        Call<List<Shopper>> call = client.getAllShoppers();
+        call.enqueue(callback);
+    }
+
 }

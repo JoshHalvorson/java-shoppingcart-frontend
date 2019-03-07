@@ -34,6 +34,9 @@ public interface ShoppingCartClient {
     @GET("shopkeeper/suppliers")
     Call<List<Supplier>> getAllSuppliers();
 
+    @GET("admin/shoppers")
+    Call<List<Shopper>> getAllShoppers();
+
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);
 
