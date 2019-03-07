@@ -63,7 +63,7 @@ public class SuppliersListRecyclerViewAdapter  extends
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("supplier", supplier);
                 editSupplierFragment.setArguments(bundle);
-                ft.add(R.id.fragment_container, editSupplierFragment, "editsupplierfragment");
+                ft.replace(R.id.fragment_container, editSupplierFragment, "editsupplierfragment");
                 ft.addToBackStack(null);
                 ft.commit();
             }
