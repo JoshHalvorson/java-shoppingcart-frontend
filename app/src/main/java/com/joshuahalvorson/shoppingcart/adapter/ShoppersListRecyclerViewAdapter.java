@@ -1,18 +1,23 @@
 package com.joshuahalvorson.shoppingcart.adapter;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
+import com.joshuahalvorson.shoppingcart.view.fragment.EditShopperFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.EditSupplierFragment;
 
 import java.util.List;
 
@@ -50,6 +55,20 @@ public class ShoppersListRecyclerViewAdapter extends
         viewHolder.shopperBilling.setText("Billing address: " + shopper.getShopperBillingAddress());
         viewHolder.shopperPayment.setText("Payment method: " + shopper.getShopperPaymentMethod());
         viewHolder.shopperPhone.setText("Phone: " + shopper.getShopperPhoneNumber());
+
+        viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                EditShopperFragment editShopperFragment = new EditShopperFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("shopper", shopper);
+                editShopperFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, editShopperFragment, "editshopperfragment");
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
     @Override
@@ -62,6 +81,7 @@ public class ShoppersListRecyclerViewAdapter extends
 
         private final View view;
         private final TextView shopperName, shopperShipping, shopperBilling, shopperPayment, shopperPhone;
+        private final Button editButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -71,6 +91,7 @@ public class ShoppersListRecyclerViewAdapter extends
             this.shopperBilling = view.findViewById(R.id.shopper_billing);
             this.shopperPayment = view.findViewById(R.id.shopper_payment);
             this.shopperPhone = view.findViewById(R.id.shopper_phone);
+            this.editButton = view.findViewById(R.id.action_button);
         }
 
         @Override

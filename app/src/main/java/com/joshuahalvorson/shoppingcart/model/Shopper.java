@@ -3,7 +3,9 @@ package com.joshuahalvorson.shoppingcart.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Shopper {
+import java.io.Serializable;
+
+public class Shopper implements Serializable {
     @SerializedName("shopperId")
     @Expose
     private Integer shopperId;
