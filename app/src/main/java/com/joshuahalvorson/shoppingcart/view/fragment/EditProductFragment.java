@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.joshuahalvorson.shoppingcart.R;
@@ -24,6 +27,7 @@ import retrofit2.Response;
 public class EditProductFragment extends Fragment {
     private EditText productName, productDescription, productCost, productOnHand;
     private Button submitButton;
+    private CheckBox switchActive;
     private ShoppingCartViewModel viewModel;
 
     public EditProductFragment() {
@@ -43,6 +47,7 @@ public class EditProductFragment extends Fragment {
         productOnHand = view.findViewById(R.id.product_on_hand_edit_text);
 
         submitButton = view.findViewById(R.id.submit_button);
+        switchActive = view.findViewById(R.id.switch_active_check);
     }
 
     @Override
@@ -52,6 +57,8 @@ public class EditProductFragment extends Fragment {
         viewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
 
         final Product product = (Product) getArguments().getSerializable("product");
+
+        switchActive.setChecked(product.isProductActive());
 
         productName.setText(product.getProductName());
         productDescription.setText(product.getProductDescription());
@@ -65,7 +72,8 @@ public class EditProductFragment extends Fragment {
                         productDescription.getText().toString(),
                         Double.parseDouble(productCost.getText().toString()),
                         Integer.parseInt(productOnHand.getText().toString()),
-                        product.getOrderId());
+                        product.getOrderId(),
+                        switchActive.isChecked());
 
                 viewModel.updateProduct(newProduct, product.getProductId(), new Callback<Product>() {
                     @Override
@@ -84,6 +92,6 @@ public class EditProductFragment extends Fragment {
                 });
             }
         });
-
+        
     }
 }
