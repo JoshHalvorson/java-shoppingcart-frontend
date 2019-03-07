@@ -59,4 +59,8 @@ public class ShoppingCartViewModel extends ViewModel {
         ShoppingCartRepository.getAllSuppliers(callback);
     }
 
+    public void updateSupplier(Supplier supplier, long supplierid, Callback<Supplier> callback){
+        ShoppingCartRepository.updateSupplier(supplier, supplierid, callback);
+    }
+
 }
