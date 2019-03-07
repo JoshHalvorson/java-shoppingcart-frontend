@@ -5,7 +5,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,8 @@ public class EditProductsFragment extends Fragment {
     private List<Product> products;
 
     private EditProductsRecyclerViewAdapter adapter;
+
+    private FloatingActionButton addProductButton;
 
     public EditProductsFragment() {
     }
@@ -72,6 +76,8 @@ public class EditProductsFragment extends Fragment {
                 (AppCompatActivity)getActivity());
 
         recyclerView.setAdapter(adapter);
+
+        addProductButton = view.findViewById(R.id.add_product_button);
     }
 
     @Override
@@ -80,6 +86,16 @@ public class EditProductsFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(ShoppingCartViewModel.class);
 
         getAllProducts();
+
+        addProductButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.fragment_container, new AddProductFragment(), "addproductfragment");
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
     private void getAllProducts() {
