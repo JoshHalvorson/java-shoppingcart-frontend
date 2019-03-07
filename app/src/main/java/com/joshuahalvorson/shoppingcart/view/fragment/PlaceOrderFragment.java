@@ -91,13 +91,14 @@ public class PlaceOrderFragment extends Fragment {
         final List<Cart> productsInCart = new ArrayList<>();
         final List<Product> productsList = new ArrayList<>();
 
-        viewModel.getCartProducts(new Callback<List<Cart>>() {
+        viewModel.getAllProducts(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
-
-                viewModel.getAllProducts(new Callback<List<Product>>() {
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                productsList.addAll(response.body());
+                viewModel.getCartProducts(new Callback<List<Cart>>() {
                     @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                    public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                        productsInCart.addAll(response.body());
                         for (final Cart c : productsInCart) {
                             for (final Product p : productsList) {
                                 if (c.getProductId() == p.getProductId()) {
@@ -117,14 +118,15 @@ public class PlaceOrderFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
+                    public void onFailure(Call<List<Cart>> call, Throwable t) {
 
                     }
                 });
+
             }
 
             @Override
-            public void onFailure(Call<List<Cart>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
 
             }
         });
