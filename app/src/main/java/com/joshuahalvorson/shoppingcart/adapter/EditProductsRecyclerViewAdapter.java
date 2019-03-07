@@ -1,8 +1,10 @@
 package com.joshuahalvorson.shoppingcart.adapter;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import android.widget.TextView;
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
+import com.joshuahalvorson.shoppingcart.view.fragment.CartFragment;
+import com.joshuahalvorson.shoppingcart.view.fragment.EditProductFragment;
+
 import java.util.List;
 
 public class EditProductsRecyclerViewAdapter extends
@@ -61,7 +66,14 @@ public class EditProductsRecyclerViewAdapter extends
         viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch edit fragment
+                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                EditProductFragment editProductFragment = new EditProductFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                editProductFragment.setArguments(bundle);
+                ft.add(R.id.fragment_container, editProductFragment, "editproductfragment");
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
     }
