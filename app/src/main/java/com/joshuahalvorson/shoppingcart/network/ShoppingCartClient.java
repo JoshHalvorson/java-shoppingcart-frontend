@@ -14,6 +14,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -38,6 +39,9 @@ public interface ShoppingCartClient {
 
     @POST("order")
     Call<Order> addOrder(@Body Order order);
+
+    @PUT("shopkeeper/product/{productid}")
+    Call<Product> updateProduct(@Body Product product, @Path("productid") long productid);
 
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);

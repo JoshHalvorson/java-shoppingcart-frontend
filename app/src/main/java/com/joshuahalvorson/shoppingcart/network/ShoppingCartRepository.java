@@ -73,4 +73,9 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
+    public static void updateProduct(Product product, long productid, Callback<Product> callback){
+        Call<Product> call = client.updateProduct(product, productid);
+        call.enqueue(callback);
+    }
+
 }

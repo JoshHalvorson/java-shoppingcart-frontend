@@ -41,4 +41,8 @@ public class ShoppingCartViewModel extends ViewModel {
         ShoppingCartRepository.addOrder(order, callback);
     }
 
+    public void updateProduct(Product product, long productid, Callback<Product> callback){
+        ShoppingCartRepository.updateProduct(product, productid, callback);
+    }
+
 }
