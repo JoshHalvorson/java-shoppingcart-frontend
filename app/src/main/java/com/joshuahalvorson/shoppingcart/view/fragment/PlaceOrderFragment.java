@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
@@ -192,7 +193,10 @@ public class PlaceOrderFragment extends Fragment {
 
                         }
                     });
-                    Log.i("placedorder", "order has been placed");
+                    
+                    Toast.makeText(getContext(), "Order has been placed!", Toast.LENGTH_LONG)
+                            .show();
+
                     getFragmentManager().popBackStack();
                 }
             }
