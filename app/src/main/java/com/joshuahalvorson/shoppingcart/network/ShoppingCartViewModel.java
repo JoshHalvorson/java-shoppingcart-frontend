@@ -64,12 +64,12 @@ public class ShoppingCartViewModel extends ViewModel {
         ShoppingCartRepository.updateSupplier(supplier, supplierid, callback);
     }
 
-    public void getAllShoppers(Callback<List<Shopper>> callback){
-        ShoppingCartRepository.getAllShoppers(callback);
+    public void getAllShoppers(String key, Callback<List<Shopper>> callback){
+        ShoppingCartRepository.getAllShoppers(key, callback);
     }
 
-    public void updateShopper(Shopper shopper, long shopperid, Callback<Shopper> callback){
-        ShoppingCartRepository.updateShopper(shopper, shopperid, callback);
+    public void updateShopper(String key, Shopper shopper, long shopperid, Callback<Shopper> callback){
+        ShoppingCartRepository.updateShopper(key, shopper, shopperid, callback);
     }
 
     public OrderProductQuantity addOrderProductQuantity(long orderid, long productid, int quantity){

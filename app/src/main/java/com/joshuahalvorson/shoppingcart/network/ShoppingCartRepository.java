@@ -90,13 +90,13 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
-    public static void getAllShoppers(Callback<List<Shopper>> callback){
-        Call<List<Shopper>> call = client.getAllShoppers();
+    public static void getAllShoppers(String key, Callback<List<Shopper>> callback){
+        Call<List<Shopper>> call = client.getAllShoppers(key);
         call.enqueue(callback);
     }
 
-    public static void updateShopper(Shopper shopper, long shopperid, Callback<Shopper> callback){
-        Call<Shopper> call = client.updateShopper(shopper, shopperid);
+    public static void updateShopper(String key, Shopper shopper, long shopperid, Callback<Shopper> callback){
+        Call<Shopper> call = client.updateShopper(key, shopper, shopperid);
         call.enqueue(callback);
     }
 

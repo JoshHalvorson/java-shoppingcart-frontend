@@ -36,7 +36,7 @@ public interface ShoppingCartClient {
     Call<List<Supplier>> getAllSuppliers();
 
     @GET("admin/shoppers")
-    Call<List<Shopper>> getAllShoppers();
+    Call<List<Shopper>> getAllShoppers(@Header("Authorization") String key);
 
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);
@@ -63,7 +63,9 @@ public interface ShoppingCartClient {
     Call<Supplier> updateSupplier(@Body Supplier supplier, @Path("supplierid") long supplierid);
 
     @PUT("admin/shopper/{shopperid}")
-    Call<Shopper> updateShopper(@Body Shopper shopper, @Path("shopperid") long shopperid);
+    Call<Shopper> updateShopper(@Header("Authorization") String key,
+                                @Body Shopper shopper,
+                                @Path("shopperid") long shopperid);
 
     @DELETE("cart/remove/{productid}")
     Call<Product> removeProductFromCart(@Path("productid") long productid);
