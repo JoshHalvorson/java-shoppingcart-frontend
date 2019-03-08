@@ -69,7 +69,7 @@ public class EditProductsRecyclerViewAdapter extends
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("product", product);
                 editProductFragment.setArguments(bundle);
-                ft.add(R.id.fragment_container, editProductFragment, "editproductfragment");
+                ft.replace(R.id.fragment_container, editProductFragment, "editproductfragment");
                 ft.addToBackStack(null);
                 ft.commit();
             }
