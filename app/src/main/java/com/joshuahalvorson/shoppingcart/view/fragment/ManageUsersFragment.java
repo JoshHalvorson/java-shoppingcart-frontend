@@ -37,6 +37,8 @@ public class ManageUsersFragment extends Fragment {
     private RecyclerView recyclerView;
     private ShoppersListRecyclerViewAdapter adapter;
 
+    private static final String ADMIN_KEY = "";
+
     public ManageUsersFragment() {
     }
 
@@ -78,7 +80,7 @@ public class ManageUsersFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
 
-        viewModel.getAllShoppers(new Callback<List<Shopper>>() {
+        viewModel.getAllShoppers(ADMIN_KEY, new Callback<List<Shopper>>() {
             @Override
             public void onResponse(Call<List<Shopper>> call, Response<List<Shopper>> response) {
                 shoppers.addAll(response.body());
