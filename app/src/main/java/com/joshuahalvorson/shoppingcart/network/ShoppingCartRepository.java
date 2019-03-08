@@ -1,20 +1,14 @@
 package com.joshuahalvorson.shoppingcart.network;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
-
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +30,7 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
-    public static void getCartProducts(Callback<List<Cart>> callback){
+    public static void getCartProducts(Callback<List<Cart>> callback) {
         Call<List<Cart>> call = client.getCartProducts();
         call.enqueue(callback);
     }
@@ -66,7 +60,7 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
-    public static void updateProduct(Product product, long productid, Callback<Product> callback){
+    public static void updateProduct(Product product, long productid, Callback<Product> callback) {
         Call<Product> call = client.updateProduct(product, productid);
         call.enqueue(callback);
     }
@@ -81,22 +75,22 @@ public class ShoppingCartRepository {
         call.enqueue(callback);
     }
 
-    public static void getAllSuppliers(Callback<List<Supplier>> callback){
+    public static void getAllSuppliers(Callback<List<Supplier>> callback) {
         Call<List<Supplier>> call = client.getAllSuppliers();
         call.enqueue(callback);
     }
 
-    public static void updateSupplier(Supplier supplier, long supplierid, Callback<Supplier> callback){
+    public static void updateSupplier(Supplier supplier, long supplierid, Callback<Supplier> callback) {
         Call<Supplier> call = client.updateSupplier(supplier, supplierid);
         call.enqueue(callback);
     }
 
-    public static void getAllShoppers(String key, Callback<List<Shopper>> callback){
+    public static void getAllShoppers(String key, Callback<List<Shopper>> callback) {
         Call<List<Shopper>> call = client.getAllShoppers(key);
         call.enqueue(callback);
     }
 
-    public static void updateShopper(String key, Shopper shopper, long shopperid, Callback<Shopper> callback){
+    public static void updateShopper(String key, Shopper shopper, long shopperid, Callback<Shopper> callback) {
         Call<Shopper> call = client.updateShopper(key, shopper, shopperid);
         call.enqueue(callback);
     }
@@ -111,7 +105,7 @@ public class ShoppingCartRepository {
         return null;
     }
 
-    public static MutableLiveData<List<OrderProductQuantity>> getOrderProductQuantity(long orderid){
+    public static MutableLiveData<List<OrderProductQuantity>> getOrderProductQuantity(long orderid) {
         Call<List<OrderProductQuantity>> call = client.getOrderProductQuantity(orderid);
         final MutableLiveData<List<OrderProductQuantity>> data = new MutableLiveData<>();
         call.enqueue(new Callback<List<OrderProductQuantity>>() {

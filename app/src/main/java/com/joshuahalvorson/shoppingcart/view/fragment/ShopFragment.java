@@ -13,20 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.adapter.ProductsListRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,9 +77,9 @@ public class ShopFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         adapter = new ProductsListRecyclerViewAdapter(
-                        products,
-                        getActivity(),
-                        (AppCompatActivity)getActivity());
+                products,
+                getActivity(),
+                (AppCompatActivity) getActivity());
 
         recyclerView.setAdapter(adapter);
 
@@ -114,8 +110,8 @@ public class ShopFragment extends Fragment {
         viewModel.getAllProducts(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                for(Product p : response.body()){
-                    if(p.isProductActive()){
+                for (Product p : response.body()) {
+                    if (p.isProductActive()) {
                         products.add(p);
                     }
                 }

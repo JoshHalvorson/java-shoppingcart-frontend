@@ -11,16 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
-import com.joshuahalvorson.shoppingcart.view.fragment.EditProductFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.EditSupplierFragment;
-
 import java.util.List;
 
-public class SuppliersListRecyclerViewAdapter  extends
+public class SuppliersListRecyclerViewAdapter extends
         RecyclerView.Adapter<SuppliersListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Supplier> suppliers;

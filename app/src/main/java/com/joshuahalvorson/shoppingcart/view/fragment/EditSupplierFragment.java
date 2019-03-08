@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,8 @@ import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,11 +81,11 @@ public class EditSupplierFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 List<Product> products = response.body();
-                for(int i = 0; i < products.size(); i++){
+                for (int i = 0; i < products.size(); i++) {
                     CheckBox checkBox = new CheckBox(getContext());
                     checkBox.setText(products.get(i).getProductName());
-                    for(int j = 0; j < productsInSupplier.size(); j++){
-                        if(products.get(i).getProductName().equals(productsInSupplier.get(j).getProductName())){
+                    for (int j = 0; j < productsInSupplier.size(); j++) {
+                        if (products.get(i).getProductName().equals(productsInSupplier.get(j).getProductName())) {
                             checkBox.setChecked(true);
                         }
                     }
@@ -109,14 +106,14 @@ public class EditSupplierFragment extends Fragment {
                 List<CheckBox> checkboxes = new ArrayList<>();
                 List<Product> newProducts = new ArrayList<>();
 
-                for(int i = 0; i < checkboxesContainer.getChildCount(); i++){
+                for (int i = 0; i < checkboxesContainer.getChildCount(); i++) {
                     checkboxes.add((CheckBox) checkboxesContainer.getChildAt(i));
                 }
 
-                for(CheckBox c : checkboxes){
-                    if(c.isChecked()){
-                        for(Product p : allProducts){
-                            if(c.getText().toString().equals(p.getProductName())){
+                for (CheckBox c : checkboxes) {
+                    if (c.isChecked()) {
+                        for (Product p : allProducts) {
+                            if (c.getText().toString().equals(p.getProductName())) {
                                 newProducts.add(p);
                             }
                         }

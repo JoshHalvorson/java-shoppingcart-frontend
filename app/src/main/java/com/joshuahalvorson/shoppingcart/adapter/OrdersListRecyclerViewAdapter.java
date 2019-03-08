@@ -18,7 +18,6 @@ import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.List;
 
 public class OrdersListRecyclerViewAdapter extends
@@ -32,8 +31,8 @@ public class OrdersListRecyclerViewAdapter extends
     private AppCompatActivity appCompatActivity;
 
     public OrdersListRecyclerViewAdapter(List<Order> orders,
-                                           FragmentActivity activity,
-                                           AppCompatActivity appCompatActivity) {
+                                         FragmentActivity activity,
+                                         AppCompatActivity appCompatActivity) {
         this.orders = orders;
         this.activity = activity;
         this.appCompatActivity = appCompatActivity;
@@ -62,12 +61,12 @@ public class OrdersListRecyclerViewAdapter extends
         data.observe(activity, new Observer<List<OrderProductQuantity>>() {
             @Override
             public void onChanged(@Nullable List<OrderProductQuantity> orderProductQuantities) {
-                for(OrderProductQuantity o : orderProductQuantities){
-                    if(o.getOrderId() == order.getOrderId()){
-                        for(Product p : order.getProducts()){
-                            if(o.getProduct().getProductId() == p.getProductId()){
+                for (OrderProductQuantity o : orderProductQuantities) {
+                    if (o.getOrderId() == order.getOrderId()) {
+                        for (Product p : order.getProducts()) {
+                            if (o.getProduct().getProductId() == p.getProductId()) {
                                 viewHolder.orderProductList.setText(viewHolder.orderProductList.getText().toString() +
-                                        p.getProductName() +  " (" + o.getQuantity() + ") \n");
+                                        p.getProductName() + " (" + o.getQuantity() + ") \n");
                             }
                         }
                     }

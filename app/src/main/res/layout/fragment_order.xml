@@ -103,7 +103,7 @@
             android:id="@+id/customer_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_payment_method_array"/>
+            android:entries="@array/spinner_payment_method_array" />
     </LinearLayout>
 
     <TextView

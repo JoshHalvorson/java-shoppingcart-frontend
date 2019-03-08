@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
-import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -77,9 +70,9 @@ public class EditShopperFragment extends Fragment {
         sameAsBilling.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     shopperShipping.setText(shopperBilling.getText().toString());
-                }else{
+                } else {
                     shopperShipping.setText("");
                 }
             }
@@ -88,7 +81,7 @@ public class EditShopperFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((!shopperName.getText().toString().equals("")) &&
+                if ((!shopperName.getText().toString().equals("")) &&
                         (!shopperShipping.getText().toString().equals("")) &&
                         (!shopperBilling.getText().toString().equals("")) &&
                         (!shopperPhone.getText().toString().equals(""))) {

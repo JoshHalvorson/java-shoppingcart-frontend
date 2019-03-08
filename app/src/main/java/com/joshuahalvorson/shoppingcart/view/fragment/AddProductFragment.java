@@ -13,11 +13,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

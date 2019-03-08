@@ -10,28 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-import com.joshuahalvorson.shoppingcart.view.MainActivity;
-import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductsListRecyclerViewAdapter extends
-        RecyclerView.Adapter<ProductsListRecyclerViewAdapter.ViewHolder>{
+        RecyclerView.Adapter<ProductsListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Product> productList;
 
@@ -41,8 +33,8 @@ public class ProductsListRecyclerViewAdapter extends
     AppCompatActivity appCompatActivity;
 
     public ProductsListRecyclerViewAdapter(List<Product> productList,
-                                      FragmentActivity activity,
-                                      AppCompatActivity appCompatActivity) {
+                                           FragmentActivity activity,
+                                           AppCompatActivity appCompatActivity) {
         this.productList = productList;
         this.activity = activity;
         this.appCompatActivity = appCompatActivity;
@@ -68,8 +60,8 @@ public class ProductsListRecyclerViewAdapter extends
         viewHolder.productCost.setText("$" + Double.toString(product.getProductCost()));
         viewHolder.productOnHand.setText(Integer.toString(product.getProductOnHand()) + " unit(s) left");
 
-        List<String> spinnerArray =  new ArrayList<>();
-        for(int j = 1; j <= product.getProductOnHand(); j++){
+        List<String> spinnerArray = new ArrayList<>();
+        for (int j = 1; j <= product.getProductOnHand(); j++) {
             spinnerArray.add(Integer.toString(j));
         }
 
@@ -86,28 +78,28 @@ public class ProductsListRecyclerViewAdapter extends
                         Integer.parseInt(viewHolder.quantitySpinner.getSelectedItem().toString()),
                         product.getProductId(), new Callback<Product>() {
 
-                    @Override
-                    public void onResponse(Call<Product> call, Response<Product> response) {
-                        Product responseProduct = response.body();
-                        if (response.isSuccessful() && responseProduct != null) {
-                            Toast.makeText(activity,
-                                    responseProduct.getProductName() + " added to cart",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        } else {
-                            Toast.makeText(activity,
-                                    String.format("Response is " + String.valueOf(response.code()))
-                                    , Toast.LENGTH_LONG).show();
-                        }
-                    }
+                            @Override
+                            public void onResponse(Call<Product> call, Response<Product> response) {
+                                Product responseProduct = response.body();
+                                if (response.isSuccessful() && responseProduct != null) {
+                                    Toast.makeText(activity,
+                                            responseProduct.getProductName() + " added to cart",
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                } else {
+                                    Toast.makeText(activity,
+                                            String.format("Response is " + String.valueOf(response.code()))
+                                            , Toast.LENGTH_LONG).show();
+                                }
+                            }
 
-                    @Override
-                    public void onFailure(Call<Product> call, Throwable t) {
-                        Toast.makeText(activity,
-                                "Error is " + t.getMessage()
-                                , Toast.LENGTH_LONG).show();
-                    }
-                });
+                            @Override
+                            public void onFailure(Call<Product> call, Throwable t) {
+                                Toast.makeText(activity,
+                                        "Error is " + t.getMessage()
+                                        , Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
     }

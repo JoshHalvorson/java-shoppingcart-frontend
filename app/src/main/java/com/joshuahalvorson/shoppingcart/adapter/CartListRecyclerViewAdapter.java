@@ -18,6 +18,7 @@ import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CartListRecyclerViewAdapter  extends
-        RecyclerView.Adapter<CartListRecyclerViewAdapter.ViewHolder>{
+public class CartListRecyclerViewAdapter extends
+        RecyclerView.Adapter<CartListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Product> productList;
 
@@ -69,7 +70,7 @@ public class CartListRecyclerViewAdapter  extends
         viewHolder.productCost.setText("$" + Double.toString(product.getProductCost()));
         viewHolder.productOnHand.setText(Integer.toString(product.getProductOnHand()) + " unit(s) left");
 
-        List<String> spinnerArray =  new ArrayList<>();
+        List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add(cart.getQuantity().toString());
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>

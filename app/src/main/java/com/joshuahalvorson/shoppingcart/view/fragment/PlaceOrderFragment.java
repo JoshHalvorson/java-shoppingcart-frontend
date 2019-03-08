@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -135,9 +131,9 @@ public class PlaceOrderFragment extends Fragment {
         sameAsBilling.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     shippingText.setText(billingText.getText().toString());
-                }else{
+                } else {
                     shippingText.setText("");
                 }
             }
@@ -146,7 +142,7 @@ public class PlaceOrderFragment extends Fragment {
         confirmOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((!nameText.getText().toString().equals("")) &&
+                if ((!nameText.getText().toString().equals("")) &&
                         (!shippingText.getText().toString().equals("")) &&
                         (!billingText.getText().toString().equals("")) &&
                         (!phoneText.getText().toString().equals(""))) {
@@ -157,7 +153,7 @@ public class PlaceOrderFragment extends Fragment {
                     shopper.setShopperBillingAddress(billingText.getText().toString());
                     shopper.setShopperPhoneNumber(phoneText.getText().toString());
                     shopper.setShopperPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
-                    
+
                     final Order order = new Order();
                     order.setProducts(products);
                     order.setOrderShippingAddress(shopper.getShopperShippingAddress());
@@ -173,7 +169,7 @@ public class PlaceOrderFragment extends Fragment {
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            for(Cart c : carts){
+                                            for (Cart c : carts) {
                                                 viewModel.addOrderProductQuantity(response.body().getOrderId(),
                                                         c.getProductId(), c.getQuantity());
                                             }
@@ -193,7 +189,7 @@ public class PlaceOrderFragment extends Fragment {
 
                         }
                     });
-                    
+
                     Toast.makeText(getContext(), "Order has been placed!", Toast.LENGTH_LONG)
                             .show();
 

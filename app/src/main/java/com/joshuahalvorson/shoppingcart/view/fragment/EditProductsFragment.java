@@ -2,7 +2,6 @@ package com.joshuahalvorson.shoppingcart.view.fragment;
 
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,16 +15,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.adapter.EditProductsRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,7 +64,7 @@ public class EditProductsFragment extends Fragment {
         adapter = new EditProductsRecyclerViewAdapter(
                 products,
                 getActivity(),
-                (AppCompatActivity)getActivity());
+                (AppCompatActivity) getActivity());
 
         recyclerView.setAdapter(adapter);
 

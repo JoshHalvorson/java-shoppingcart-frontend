@@ -21,7 +21,7 @@ import com.joshuahalvorson.shoppingcart.view.fragment.ShopFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        ShopFragment.OnFragmentInteractionListener{
+        ShopFragment.OnFragmentInteractionListener {
 
     FragmentManager fragmentManager;
     FragmentTransaction ft;
@@ -112,6 +112,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onShopFragmentInteraction(Uri uri) {
-        
+
     }
 }

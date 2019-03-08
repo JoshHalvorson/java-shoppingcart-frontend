@@ -2,7 +2,6 @@ package com.joshuahalvorson.shoppingcart.view.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,22 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.adapter.CartListRecyclerViewAdapter;
-import com.joshuahalvorson.shoppingcart.adapter.ProductsListRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,7 +76,7 @@ public class CartFragment extends Fragment {
         adapter = new CartListRecyclerViewAdapter(
                 products,
                 getActivity(),
-                (AppCompatActivity)getActivity(),
+                (AppCompatActivity) getActivity(),
                 carts);
 
         recyclerView.setAdapter(adapter);
@@ -109,9 +102,9 @@ public class CartFragment extends Fragment {
 
                         productsList.addAll(response.body());
 
-                        for(Cart c : productsInCart){
-                            for(Product p : productsList){
-                                if(c.getProductId() == p.getProductId()){
+                        for (Cart c : productsInCart) {
+                            for (Product p : productsList) {
+                                if (c.getProductId() == p.getProductId()) {
                                     products.add(p);
                                     carts.add(c);
                                     adapter.notifyDataSetChanged();

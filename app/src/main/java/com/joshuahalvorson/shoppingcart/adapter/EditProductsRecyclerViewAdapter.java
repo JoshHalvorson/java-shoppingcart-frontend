@@ -16,9 +16,7 @@ import android.widget.TextView;
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-import com.joshuahalvorson.shoppingcart.view.fragment.CartFragment;
 import com.joshuahalvorson.shoppingcart.view.fragment.EditProductFragment;
-
 import java.util.List;
 
 public class EditProductsRecyclerViewAdapter extends

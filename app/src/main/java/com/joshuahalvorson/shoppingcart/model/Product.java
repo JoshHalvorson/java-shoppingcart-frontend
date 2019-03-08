@@ -33,7 +33,7 @@ public class Product implements Serializable {
     private boolean productActive;
 
     public Product(String productName, String productDescription, double productCost, Integer productOnHand,
-    long orderid, boolean productActive) {
+                   long orderid, boolean productActive) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productCost = productCost;

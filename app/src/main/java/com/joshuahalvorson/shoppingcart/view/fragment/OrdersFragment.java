@@ -14,16 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.joshuahalvorson.shoppingcart.R;
-import com.joshuahalvorson.shoppingcart.adapter.CartListRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.adapter.OrdersListRecyclerViewAdapter;
 import com.joshuahalvorson.shoppingcart.model.Order;
 import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +72,7 @@ public class OrdersFragment extends Fragment {
         adapter = new OrdersListRecyclerViewAdapter(
                 orders,
                 getActivity(),
-                (AppCompatActivity)getActivity());
+                (AppCompatActivity) getActivity());
 
         recyclerView.setAdapter(adapter);
     }

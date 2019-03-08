@@ -11,14 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.joshuahalvorson.shoppingcart.R;
-import com.joshuahalvorson.shoppingcart.model.Order;
-import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.view.fragment.EditShopperFragment;
-import com.joshuahalvorson.shoppingcart.view.fragment.EditSupplierFragment;
-
 import java.util.List;
 
 public class ShoppersListRecyclerViewAdapter extends
@@ -30,8 +25,8 @@ public class ShoppersListRecyclerViewAdapter extends
     private AppCompatActivity appCompatActivity;
 
     public ShoppersListRecyclerViewAdapter(List<Shopper> shoppers,
-                                         FragmentActivity activity,
-                                         AppCompatActivity appCompatActivity) {
+                                           FragmentActivity activity,
+                                           AppCompatActivity appCompatActivity) {
         this.shoppers = shoppers;
         this.activity = activity;
         this.appCompatActivity = appCompatActivity;
