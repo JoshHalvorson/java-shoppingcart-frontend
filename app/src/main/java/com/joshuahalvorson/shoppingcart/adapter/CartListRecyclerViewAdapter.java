@@ -94,7 +94,8 @@ public class CartListRecyclerViewAdapter  extends
                                             .getProductName() + " removed from cart",
                                     Toast.LENGTH_LONG).show();
                             productList.remove(product);
-                            viewHolder.view.setVisibility(View.GONE);
+                            notifyDataSetChanged();
+                            //viewHolder.view.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(activity,
                                     String.format("Response is " + String.valueOf(response.code()))
