@@ -60,6 +60,8 @@ public class ShopFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Shop");
+
         products = new ArrayList<>();
         RecyclerView recyclerView = view.findViewById(R.id.products_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {

@@ -53,6 +53,8 @@ public class CartFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cart");
+
         products = new ArrayList<>();
         carts = new ArrayList<>();
 

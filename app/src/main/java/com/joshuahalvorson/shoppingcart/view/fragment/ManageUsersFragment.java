@@ -45,6 +45,8 @@ public class ManageUsersFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Manage Users");
+
         recyclerView = view.findViewById(R.id.shoppers_list);
         shoppers = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {

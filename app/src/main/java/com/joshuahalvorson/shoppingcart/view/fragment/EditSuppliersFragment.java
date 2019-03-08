@@ -49,6 +49,8 @@ public class EditSuppliersFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Edit Suppliers");
+
         suppliers = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.suppliers_list);

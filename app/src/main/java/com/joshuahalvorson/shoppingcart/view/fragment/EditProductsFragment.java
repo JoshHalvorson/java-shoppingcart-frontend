@@ -45,6 +45,8 @@ public class EditProductsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Edit Products");
+
         products = new ArrayList<>();
         RecyclerView recyclerView = view.findViewById(R.id.edit_products_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {
