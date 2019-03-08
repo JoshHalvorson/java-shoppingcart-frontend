@@ -163,15 +163,21 @@ public class PlaceOrderFragment extends Fragment {
                     order.setOrderPaymentMethod(shopper.getShopperPaymentMethod());
                     order.setOrderShipped(false);
 
-                    //save info to db
                     viewModel.addShopper(shopper, new Callback<Shopper>() {
                         @Override
                         public void onResponse(Call<Shopper> call, Response<Shopper> response) {
-                            Log.i("addedshopper", shopper.getShopperName() + " added");
                             viewModel.addOrder(order, new Callback<Order>() {
                                 @Override
-                                public void onResponse(Call<Order> call, Response<Order> response) {
-                                    Log.i("addedorder", "added");
+                                public void onResponse(Call<Order> call, final Response<Order> response) {
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            for(Cart c : carts){
+                                                viewModel.addOrderProductQuantity(response.body().getOrderId(),
+                                                        c.getProductId(), c.getQuantity());
+                                            }
+                                        }
+                                    }).start();
                                 }
 
                                 @Override

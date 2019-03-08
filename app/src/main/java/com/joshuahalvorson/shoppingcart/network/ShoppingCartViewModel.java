@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
+import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
@@ -69,6 +70,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public void updateShopper(Shopper shopper, long shopperid, Callback<Shopper> callback){
         ShoppingCartRepository.updateShopper(shopper, shopperid, callback);
+    }
+
+    public OrderProductQuantity addOrderProductQuantity(long orderid, long productid, int quantity){
+        return ShoppingCartRepository.addOrderProductQuantity(orderid, productid, quantity);
     }
 
 }

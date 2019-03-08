@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
+import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
@@ -97,6 +98,16 @@ public class ShoppingCartRepository {
     public static void updateShopper(Shopper shopper, long shopperid, Callback<Shopper> callback){
         Call<Shopper> call = client.updateShopper(shopper, shopperid);
         call.enqueue(callback);
+    }
+
+    public static OrderProductQuantity addOrderProductQuantity(long orderid, long productid, int quantity) {
+        Call<OrderProductQuantity> call = client.addOrderProductQuantity(orderid, productid, quantity);
+        try {
+            return call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

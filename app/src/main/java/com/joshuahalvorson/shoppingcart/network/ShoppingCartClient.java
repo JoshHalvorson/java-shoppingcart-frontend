@@ -3,6 +3,7 @@ package com.joshuahalvorson.shoppingcart.network;
 import com.google.gson.JsonObject;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
+import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
 import com.joshuahalvorson.shoppingcart.model.Shopper;
 import com.joshuahalvorson.shoppingcart.model.Supplier;
@@ -49,6 +50,11 @@ public interface ShoppingCartClient {
 
     @POST("order")
     Call<Order> addOrder(@Body Order order);
+
+    @POST("order/{orderid}/{productid}/{quantity}")
+    Call<OrderProductQuantity> addOrderProductQuantity(@Path("orderid") long orderid,
+                                                       @Path("productid") long productid,
+                                                       @Path("quantity") int quantity);
 
     @PUT("shopkeeper/product/{productid}")
     Call<Product> updateProduct(@Body Product product, @Path("productid") long productid);
