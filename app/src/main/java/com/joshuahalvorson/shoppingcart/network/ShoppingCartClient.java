@@ -1,5 +1,8 @@
 package com.joshuahalvorson.shoppingcart.network;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
 import com.google.gson.JsonObject;
 import com.joshuahalvorson.shoppingcart.model.Cart;
 import com.joshuahalvorson.shoppingcart.model.Order;
@@ -37,6 +40,9 @@ public interface ShoppingCartClient {
 
     @GET("admin/shoppers")
     Call<List<Shopper>> getAllShoppers(@Header("Authorization") String key);
+
+    @GET("shopkeeper/order/{orderid}")
+    Call<List<OrderProductQuantity>> getOrderProductQuantity(@Path("orderid") long orderid);
 
     @POST("shopkeeper/product")
     Call<Product> addProduct(@Body Product product);

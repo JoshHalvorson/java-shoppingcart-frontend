@@ -1,5 +1,6 @@
 package com.joshuahalvorson.shoppingcart.network;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.joshuahalvorson.shoppingcart.model.Cart;
@@ -74,6 +75,10 @@ public class ShoppingCartViewModel extends ViewModel {
 
     public OrderProductQuantity addOrderProductQuantity(long orderid, long productid, int quantity){
         return ShoppingCartRepository.addOrderProductQuantity(orderid, productid, quantity);
+    }
+
+    public LiveData<List<OrderProductQuantity>> getOrderProductQuantity(long orderid){
+        return ShoppingCartRepository.getOrderProductQuantity(orderid);
     }
 
 }

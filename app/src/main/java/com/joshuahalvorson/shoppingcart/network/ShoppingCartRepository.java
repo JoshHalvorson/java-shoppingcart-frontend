@@ -1,5 +1,6 @@
 package com.joshuahalvorson.shoppingcart.network;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
@@ -108,6 +109,23 @@ public class ShoppingCartRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static MutableLiveData<List<OrderProductQuantity>> getOrderProductQuantity(long orderid){
+        Call<List<OrderProductQuantity>> call = client.getOrderProductQuantity(orderid);
+        final MutableLiveData<List<OrderProductQuantity>> data = new MutableLiveData<>();
+        call.enqueue(new Callback<List<OrderProductQuantity>>() {
+            @Override
+            public void onResponse(Call<List<OrderProductQuantity>> call, Response<List<OrderProductQuantity>> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<OrderProductQuantity>> call, Throwable t) {
+
+            }
+        });
+        return data;
     }
 
 }

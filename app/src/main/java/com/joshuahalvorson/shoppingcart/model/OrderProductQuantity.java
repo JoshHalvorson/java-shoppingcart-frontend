@@ -10,9 +10,9 @@ public class OrderProductQuantity {
     @SerializedName("orderId")
     @Expose
     private Integer orderId;
-    @SerializedName("productId")
+    @SerializedName("product")
     @Expose
-    private Integer productId;
+    private Product product;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
@@ -33,12 +33,12 @@ public class OrderProductQuantity {
         this.orderId = orderId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {

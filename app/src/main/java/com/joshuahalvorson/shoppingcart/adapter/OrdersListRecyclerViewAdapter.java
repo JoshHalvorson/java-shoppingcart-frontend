@@ -1,7 +1,11 @@
 package com.joshuahalvorson.shoppingcart.adapter;
 
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +15,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.joshuahalvorson.shoppingcart.R;
 import com.joshuahalvorson.shoppingcart.model.Order;
+import com.joshuahalvorson.shoppingcart.model.OrderProductQuantity;
 import com.joshuahalvorson.shoppingcart.model.Product;
+import com.joshuahalvorson.shoppingcart.network.ShoppingCartViewModel;
+
 import java.util.List;
 
 public class OrdersListRecyclerViewAdapter extends
         RecyclerView.Adapter<OrdersListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Order> orders;
+
+    private ShoppingCartViewModel viewModel;
 
     private FragmentActivity activity;
     private AppCompatActivity appCompatActivity;
@@ -43,13 +52,30 @@ public class OrdersListRecyclerViewAdapter extends
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         final Order order = orders.get(i);
 
+        viewModel = ViewModelProviders.of(activity).get(ShoppingCartViewModel.class);
+
         viewHolder.orderShipping.setText("Shipping address: " + order.getOrderShippingAddress());
         viewHolder.orderPayment.setText("Payment method: " + order.getOrderPaymentMethod());
         viewHolder.orderShipped.setText("Order shipped: " + order.getOrderShipped().toString());
-        for(Product p : order.getProducts()){
-            viewHolder.orderProductList.setText(viewHolder.orderProductList.getText().toString() +
-                    p.getProductName() + "\n");
-        }
+
+        LiveData<List<OrderProductQuantity>> data = viewModel.getOrderProductQuantity(order.getOrderId());
+        data.observe(activity, new Observer<List<OrderProductQuantity>>() {
+            @Override
+            public void onChanged(@Nullable List<OrderProductQuantity> orderProductQuantities) {
+                for(OrderProductQuantity o : orderProductQuantities){
+                    if(o.getOrderId() == order.getOrderId()){
+                        for(Product p : order.getProducts()){
+                            if(o.getProduct().getProductId() == p.getProductId()){
+                                viewHolder.orderProductList.setText(viewHolder.orderProductList.getText().toString() +
+                                        p.getProductName() +  " (" + o.getQuantity() + ") \n");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
     }
 
     @Override
