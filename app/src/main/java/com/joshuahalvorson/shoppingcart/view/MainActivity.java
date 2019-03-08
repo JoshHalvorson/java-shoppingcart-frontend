@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
+
+        ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.fragment_container, new ShopFragment(), "shopfragment");
+        ft.commit();
+        
     }
 
     @Override
