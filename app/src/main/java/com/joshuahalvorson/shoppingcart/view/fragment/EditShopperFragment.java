@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,8 @@ public class EditShopperFragment extends Fragment {
     private ShoppingCartViewModel viewModel;
 
     private CheckBox sameAsBilling;
+
+    private static final String ADMIN_KEY = "";
 
     public EditShopperFragment() {
     }
@@ -95,10 +100,10 @@ public class EditShopperFragment extends Fragment {
                     newShopper.setShopperPhoneNumber(shopperPhone.getText().toString());
                     newShopper.setShopperPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
 
-                    viewModel.updateShopper(newShopper, shopper.getShopperId(), new Callback<Shopper>() {
+                    viewModel.updateShopper(ADMIN_KEY, newShopper, shopper.getShopperId(), new Callback<Shopper>() {
                         @Override
                         public void onResponse(Call<Shopper> call, Response<Shopper> response) {
-                            
+                            getFragmentManager().popBackStack();
                         }
 
                         @Override
@@ -107,7 +112,7 @@ public class EditShopperFragment extends Fragment {
                                     t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
-                    getFragmentManager().popBackStack();
+
                 }
             }
         });
